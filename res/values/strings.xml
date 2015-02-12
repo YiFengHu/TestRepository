@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- General -->
+    <string name="app_name">MoneyBook</string>
+    <string name="hello_world">Hello world!</string>
+    
+    <!-- Menu -->
+    <string name="menu_search">Search</string>
+    <string name="menu_add">Add</string>
+    <string name="menu_add_detail">Add new detail</string>
+
+</resources>
