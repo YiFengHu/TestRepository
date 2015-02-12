@@ -38,39 +38,43 @@ public class MainActivity extends FragmentActivity implements TabListener, OnPag
 	protected static final String TAB_ADD_DETAIL="Add Detail";
 	protected static final String TAB_DAILY_DETAIL="Daily Detail";
 	protected static final String TAB_MONTHLY_DETAIL="Monthly Detail";
-
 	
 	private ActionBar actionBar=null;
 	private Context context=null;
-	private TextView textView=null;
 	
 	private ViewPager viewPager=null;
 	private ArrayList<TabItem> viewPagerDataList=null;
 	private ArrayList<Tab> tabList=null;
 	
 	private FragmentManager fragmentManager=null;
+	private LayoutInflater mInflater=null;
+	private MyPagerAdapter myPagerAdapter=null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		context = (Activity)this;
 		fragmentManager = getSupportFragmentManager();
-		textView = (TextView)findViewById(R.id.textView);
+		mInflater = getLayoutInflater().from(this);
+		context = (Activity)this;
 		
-		initViewPager();
+		viewPager = (ViewPager) findViewById(R.id.viewpager);
+		
+		initViewPagerDataList();
 		initActionBar();
+		initViewPager();
+	}
+	
+	private void initViewPagerDataList(){
+		 viewPagerDataList = new ArrayList<TabItem>();
+	     viewPagerDataList.add(new TabItem(TAB_ADD_DETAIL, new AddDetailFragment()));
+	     viewPagerDataList.add(new TabItem(TAB_DAILY_DETAIL, new DailyDetailFragment()));
+	     viewPagerDataList.add(new TabItem(TAB_MONTHLY_DETAIL, new MonthlyDetailFragment()));
 	}
 
 	private void initViewPager() {
-		LayoutInflater mInflater = getLayoutInflater().from(this);
-        
-        viewPagerDataList = new ArrayList<TabItem>();
-        viewPagerDataList.add(new TabItem(TAB_ADD_DETAIL, new AddDetailFragment()));
-        viewPagerDataList.add(new TabItem(TAB_DAILY_DETAIL, new DailyDetailFragment()));
-        viewPagerDataList.add(new TabItem(TAB_MONTHLY_DETAIL, new MonthlyDetailFragment()));
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
-        viewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), viewPagerDataList));
+		myPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(), viewPagerDataList);
+        viewPager.setAdapter(myPagerAdapter);
         viewPager.setCurrentItem(0);
         viewPager.setOnPageChangeListener(this);
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
@@ -117,24 +121,41 @@ public class MainActivity extends FragmentActivity implements TabListener, OnPag
 			Tab tab = actionBar.newTab().setText(viewPagerDataList.get(i).getTitle()).setTabListener(this);
 			tab.setTag(i);
 			actionBar.addTab(tab);
+			tabList.add(tab);
 		}
 	}
 
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		Toast.makeText(context, (String)tab.getText()+": "+ft.toString(), Toast.LENGTH_SHORT).show();
 		viewPager.setCurrentItem((int)tab.getTag());
 	}
 
 	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-//		Toast.makeText(context, (String)tab.getText()+": "+ft.toString(), Toast.LENGTH_SHORT).show();
-//		textView.setText(tab.getText());
+		
 	}
 
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {
-//		Toast.makeText(context, (String)tab.getText()+": "+ft.toString(), Toast.LENGTH_SHORT).show();
+		
+	}
+	
+
+	@Override
+	public void onPageScrollStateChanged(int arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onPageScrolled(int arg0, float arg1, int arg2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onPageSelected(int page) {
+		actionBar.selectTab(tabList.get(page));
 	}
 	
 	class TabItem{
@@ -180,38 +201,9 @@ public class MainActivity extends FragmentActivity implements TabListener, OnPag
 		}
 		
 		@Override
-		public boolean isViewFromObject(View view, Object object) {
-			return view == (View)object;
-		}
-
-		@Override
-		public Object instantiateItem(ViewGroup container, int position) {
-			container.addView(dataList.get(position).getFragment().getView());
-			return container;
-		}
-
-		@Override
-		public Fragment getItem(int arg0) {
-			// TODO Auto-generated method stub
-			return null;
+		public Fragment getItem(int position) {
+			return dataList.get(position).getFragment();
 		}
 	
-	}
-
-	@Override
-	public void onPageScrollStateChanged(int arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onPageScrolled(int arg0, float arg1, int arg2) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onPageSelected(int page) {
-		actionBar.selectTab(tabList.get(page));
 	}
 }
