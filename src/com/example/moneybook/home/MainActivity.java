@@ -3,6 +3,7 @@ package com.example.moneybook.home;
 import java.util.ArrayList;
 
 import com.example.moneybook.R;
+import com.example.moneybook.customview.PagerSlidingTabStrip;
 import com.example.moneybook.fragment.AddDetailFragment;
 import com.example.moneybook.fragment.DailyDetailFragment;
 import com.example.moneybook.fragment.MonthlyDetailFragment;
@@ -13,6 +14,7 @@ import android.app.FragmentTransaction;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -49,6 +51,7 @@ public class MainActivity extends FragmentActivity implements TabListener, OnPag
 	private FragmentManager fragmentManager=null;
 	private LayoutInflater mInflater=null;
 	private MyPagerAdapter myPagerAdapter=null;
+	private PagerSlidingTabStrip pagerSlidingTabStrip=null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,27 +62,45 @@ public class MainActivity extends FragmentActivity implements TabListener, OnPag
 		context = (Activity)this;
 		
 		viewPager = (ViewPager) findViewById(R.id.viewpager);
+		pagerSlidingTabStrip = (PagerSlidingTabStrip)findViewById(R.id.pagerSlidingTabStrip);
 		
-		initViewPagerDataList();
-		initActionBar();
 		initViewPager();
+		initTabStrip();
 	}
 	
-	private void initViewPagerDataList(){
-		 viewPagerDataList = new ArrayList<TabItem>();
-	     viewPagerDataList.add(new TabItem(TAB_ADD_DETAIL, new AddDetailFragment()));
-	     viewPagerDataList.add(new TabItem(TAB_DAILY_DETAIL, new DailyDetailFragment()));
-	     viewPagerDataList.add(new TabItem(TAB_MONTHLY_DETAIL, new MonthlyDetailFragment()));
+	private void initTabStrip() {
+		pagerSlidingTabStrip.setViewPager(viewPager);
+		pagerSlidingTabStrip.setIndicatorColor(Color.RED);
+		pagerSlidingTabStrip.setOnPageChangeListener(this);
 	}
 
 	private void initViewPager() {
-		myPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(), viewPagerDataList);
-        viewPager.setAdapter(myPagerAdapter);
-        viewPager.setCurrentItem(0);
-        viewPager.setOnPageChangeListener(this);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-	}
+		tabList = new ArrayList<ActionBar.Tab>();
+		viewPagerDataList = new ArrayList<TabItem>();
+		viewPagerDataList.add(new TabItem(TAB_ADD_DETAIL, new AddDetailFragment()));
+		viewPagerDataList.add(new TabItem(TAB_DAILY_DETAIL, new DailyDetailFragment()));
+		viewPagerDataList.add(new TabItem(TAB_MONTHLY_DETAIL, new MonthlyDetailFragment()));
 
+		myPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(),viewPagerDataList);
+		viewPager.setAdapter(myPagerAdapter);
+		viewPager.setCurrentItem(0);
+		viewPager.setOnPageChangeListener(this);
+
+//		actionBar = getActionBar();
+//		actionBar.setDisplayHomeAsUpEnabled(false);
+//		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+//
+//		for (int i = 0; i < viewPagerDataList.size(); i++) {
+//			Tab tab = actionBar.newTab()
+//					.setText(viewPagerDataList.get(i).getTitle())
+//					.setTabListener(this);
+//			tab.setTag(i);
+//			actionBar.addTab(tab);
+//			tabList.add(tab);
+//		}
+
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -111,19 +132,6 @@ public class MainActivity extends FragmentActivity implements TabListener, OnPag
 		return super.onOptionsItemSelected(item);
 	}
 	
-	protected void initActionBar(){
-		tabList = new ArrayList<ActionBar.Tab>();
-		actionBar = getActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(false);
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		
-		for(int i=0; i<viewPagerDataList.size(); i++){
-			Tab tab = actionBar.newTab().setText(viewPagerDataList.get(i).getTitle()).setTabListener(this);
-			tab.setTag(i);
-			actionBar.addTab(tab);
-			tabList.add(tab);
-		}
-	}
 
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
@@ -155,7 +163,7 @@ public class MainActivity extends FragmentActivity implements TabListener, OnPag
 
 	@Override
 	public void onPageSelected(int page) {
-		actionBar.selectTab(tabList.get(page));
+//		actionBar.selectTab(tabList.get(page));
 	}
 	
 	class TabItem{
@@ -203,6 +211,11 @@ public class MainActivity extends FragmentActivity implements TabListener, OnPag
 		@Override
 		public Fragment getItem(int position) {
 			return dataList.get(position).getFragment();
+		}
+
+		@Override
+		public CharSequence getPageTitle(int position) {
+			return dataList.get(position).getTitle();
 		}
 	
 	}
