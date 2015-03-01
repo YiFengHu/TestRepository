@@ -37,9 +37,9 @@ import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity implements TabListener, OnPageChangeListener{
 	
-	protected static final String TAB_ADD_DETAIL="Add Detail";
-	protected static final String TAB_DAILY_DETAIL="Daily Detail";
-	protected static final String TAB_MONTHLY_DETAIL="Monthly Detail";
+	protected static final int TAB_DAILY_DETAIL= R.string.main_daily_detail;
+	protected static final int TAB_WEEKLY_DETAIL= R.string.main_weekly_detail;
+	protected static final int TAB_MONTHLY_DETAIL= R.string.main_monthly_detail;
 	
 	private ActionBar actionBar=null;
 	private Context context=null;
@@ -77,9 +77,9 @@ public class MainActivity extends FragmentActivity implements TabListener, OnPag
 	private void initViewPager() {
 		tabList = new ArrayList<ActionBar.Tab>();
 		viewPagerDataList = new ArrayList<TabItem>();
-		viewPagerDataList.add(new TabItem(TAB_ADD_DETAIL, new AddDetailFragment()));
-		viewPagerDataList.add(new TabItem(TAB_DAILY_DETAIL, new DailyDetailFragment()));
-		viewPagerDataList.add(new TabItem(TAB_MONTHLY_DETAIL, new MonthlyDetailFragment()));
+		viewPagerDataList.add(new TabItem(context.getString(TAB_DAILY_DETAIL), new AddDetailFragment()));
+		viewPagerDataList.add(new TabItem(context.getString(TAB_DAILY_DETAIL), new DailyDetailFragment()));
+		viewPagerDataList.add(new TabItem(context.getString(TAB_MONTHLY_DETAIL), new MonthlyDetailFragment()));
 
 		myPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(),viewPagerDataList);
 		viewPager.setAdapter(myPagerAdapter);

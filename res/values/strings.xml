@@ -3,11 +3,15 @@
 
     <!-- General -->
     <string name="app_name">MoneyBook</string>
-    <string name="hello_world">Hello world!</string>
-    
+
     <!-- Menu -->
     <string name="menu_search">Search</string>
-    <string name="menu_add">Add</string>
-    <string name="menu_add_detail">Add new detail</string>
+    <string name="menu_option">Option</string>
+    <string name="menu_add_detail">New Detail</string>
+
+    <!-- Main -->
+    <string name="main_daily_detail">Daily Detail</string>
+    <string name="main_weekly_detail">Weekly Detail</string>
+    <string name="main_monthly_detail">Monthly Dtail</string>
 
 </resources>

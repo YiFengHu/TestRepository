@@ -13,7 +13,7 @@
         android:icon="@drawable/ic_add"
         android:orderInCategory="100"
         android:showAsAction="always"
-        android:title="@string/menu_add">
+        android:title="@string/menu_option">
         <menu>
             <item
                 android:id="@+id/action_add_detail"
