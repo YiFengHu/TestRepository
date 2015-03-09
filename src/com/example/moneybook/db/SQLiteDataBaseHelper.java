@@ -3,35 +3,34 @@ package com.example.moneybook.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class SQLiteDataBaseHelper extends SQLiteOpenHelper {
 	
-	private static SQLiteDataBaseHelper instance;
-	private static SQLiteDatabase sqlDataBase;
+	private  String TAG = SQLiteDataBaseHelper.class.getSimpleName();
+	private  SQLiteDatabase sqlDataBase;
 	private static final String DATABASE_NAME = "detail.db";
 	private static final int DATABASE_VERSION = 2;
 
 	public SQLiteDataBaseHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
-	
-	public SQLiteDataBaseHelper getInstance(Context context){
-		if(instance == null){
-			instance = new SQLiteDataBaseHelper(context);
-		}
-		return instance;
-	}
 
 	@Override
 	public void onCreate(SQLiteDatabase dataBase) {
 		sqlDataBase = dataBase;
-		dataBase.execSQL(DetailRepository.createDBSyntax());
+		createDetailTable();
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL("DROP TABLE IF EXISTS " + DetailRepository.DATABASE_TABLE);
 		onCreate(db);
+	}
+	
+	private void createDetailTable(){
+		Log.d(TAG, "Create Table: "+DATABASE_NAME);
+		sqlDataBase.execSQL(DetailRepository.createDBSyntax());
 	}
 	
 	public SQLiteDatabase getWritebleDataBase(){
