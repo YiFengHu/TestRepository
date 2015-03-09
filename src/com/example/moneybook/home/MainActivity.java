@@ -3,6 +3,7 @@ package com.example.moneybook.home;
 import java.util.ArrayList;
 
 import com.example.moneybook.R;
+import com.example.moneybook.base.BaseFragmentActivity;
 import com.example.moneybook.customview.PagerSlidingTabStrip;
 import com.example.moneybook.fragment.AddDetailFragment;
 import com.example.moneybook.fragment.DailyDetailFragment;
@@ -18,7 +19,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
@@ -36,7 +36,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends FragmentActivity implements TabListener, OnPageChangeListener{
+public class MainActivity extends BaseFragmentActivity implements TabListener, OnPageChangeListener{
 	
 	protected static final int TAB_DAILY_DETAIL= R.string.main_daily_detail;
 	protected static final int TAB_WEEKLY_DETAIL= R.string.main_weekly_detail;

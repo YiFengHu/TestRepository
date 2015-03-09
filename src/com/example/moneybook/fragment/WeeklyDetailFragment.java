@@ -1,14 +1,14 @@
 package com.example.moneybook.fragment;
 
 import com.example.moneybook.R;
+import com.example.moneybook.base.BaseFragment;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class WeeklyDetailFragment extends Fragment{
+public class WeeklyDetailFragment extends BaseFragment{
 
 	private View rootView=null;
 	
