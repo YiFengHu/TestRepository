@@ -7,6 +7,7 @@ import com.example.moneybook.customview.PagerSlidingTabStrip;
 import com.example.moneybook.fragment.AddDetailFragment;
 import com.example.moneybook.fragment.DailyDetailFragment;
 import com.example.moneybook.fragment.MonthlyDetailFragment;
+import com.example.moneybook.fragment.WeeklyDetailFragment;
 
 import android.app.ActionBar;
 import android.app.ActionBar.TabListener;
@@ -77,8 +78,8 @@ public class MainActivity extends FragmentActivity implements TabListener, OnPag
 	private void initViewPager() {
 		tabList = new ArrayList<ActionBar.Tab>();
 		viewPagerDataList = new ArrayList<TabItem>();
-		viewPagerDataList.add(new TabItem(context.getString(TAB_DAILY_DETAIL), new AddDetailFragment()));
 		viewPagerDataList.add(new TabItem(context.getString(TAB_DAILY_DETAIL), new DailyDetailFragment()));
+		viewPagerDataList.add(new TabItem(context.getString(TAB_WEEKLY_DETAIL), new WeeklyDetailFragment()));
 		viewPagerDataList.add(new TabItem(context.getString(TAB_MONTHLY_DETAIL), new MonthlyDetailFragment()));
 
 		myPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(),viewPagerDataList);
