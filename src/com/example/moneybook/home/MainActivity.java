@@ -99,7 +99,7 @@ public class MainActivity extends BaseFragmentActivity{
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(LAYOUT_FRAME, mainFragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        ft.addToBackStack(null).commit();
+        ft.commit();
 		
 		fragmentManager.beginTransaction();
 	}
