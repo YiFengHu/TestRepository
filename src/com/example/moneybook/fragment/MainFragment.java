@@ -107,7 +107,7 @@ public class MainFragment extends BaseFragment  implements TabListener, OnPageCh
 	
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		viewPager.setCurrentItem((int)tab.getTag());
+		viewPager.setCurrentItem((Integer)tab.getTag());
 	}
 
 	@Override
