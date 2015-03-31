@@ -13,7 +13,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppBaseTheme"
-        android:name="com.example.moneybook.base.MoneyBookApp">p
+        android:name="com.example.moneybook.base.MoneyBookApp">
         <activity
             android:name=".home.MainActivity"
             android:label="@string/app_name"
